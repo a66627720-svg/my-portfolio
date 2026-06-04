@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { UserButton } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
 import { Float, MeshDistortMaterial } from "@react-three/drei";
@@ -17,18 +16,28 @@ export default function Home() {
   const capabilities = ["Digital Marketing", "Performance Marketing", "Media Buying", "Paid Advertising", "Funnel Strategy", "Brand Launch"];
 
   return (
-    <main className="min-h-screen bg-[#030014] text-white relative overflow-x-hidden selection:bg-amber-500/30">
-      {/* الخلفية */}
+    <main className="min-h-screen bg-[#030014] text-white relative overflow-x-hidden">
+      {/* 1. Background glow and geometric screens */}
       <div className="fixed inset-0 z-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,#f59e0b_0%,transparent_70%)] blur-[120px]" />
       <div className="fixed inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
 
       {/* Navbar */}
       <nav className="w-full fixed top-0 left-0 z-50 flex items-center justify-between px-8 py-4 bg-gray-900/10 backdrop-blur-md border-b border-gray-800/40">
-        <div className="text-amber-500 font-black text-xl tracking-wider select-none">PORTFOLIO</div>
-        <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: "w-10 h-10 border-2 border-amber-500/80" } }} />
+        <div className="text-amber-500 font-black text-xl tracking-wider select-none">
+          PORTFOLIO
+        </div>
+        <div className="flex items-center gap-4">
+          <UserButton 
+            appearance={{
+              elements: {
+                avatarBox: "w-10 h-10 border-2 border-amber-500/80 hover:scale-105 transition-transform"
+              }
+            }}
+          />
+        </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* 2. Hero Section */}
       <section className="h-[80vh] flex flex-col items-center justify-center relative z-10 pt-20">
         <div className="absolute inset-0 opacity-40 pointer-events-none z-0">
           <Canvas>
@@ -42,44 +51,53 @@ export default function Home() {
           </Canvas>
         </div>
 
-        <div className="text-center z-10 relative cursor-pointer select-none px-4">
+        <div className="text-center z-10 relative cursor-pointer select-none">
           <motion.h1 
-            whileHover={{ scale: 1.05 }}
-            className="text-6xl md:text-[120px] font-black tracking-tighter text-white hover:text-amber-500 transition-colors duration-300"
+            whileHover={{ scale: 1.08, letterSpacing: "0.03em" }}
+            transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            className="text-7xl md:text-[120px] font-black tracking-tighter text-white hover:text-amber-500 transition-colors duration-300"
           >
             AHMED HATAB
           </motion.h1>
-          <motion.p className="text-lg md:text-xl text-amber-500 mt-4 tracking-[0.5em] uppercase font-bold">
+          <motion.p 
+            whileHover={{ letterSpacing: "0.7em" }}
+            transition={{ duration: 0.3 }}
+            className="text-xl text-amber-500 mt-4 tracking-[0.5em] uppercase font-bold transition-all duration-300"
+          >
             The Leader
           </motion.p>
         </div>
       </section>
 
-      {/* Capabilities Section */}
+      {/* 3. Core Capabilities Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto relative z-10">
         <h2 className="text-4xl font-black mb-12 text-center border-b border-gray-800 pb-6">CORE CAPABILITIES</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {capabilities.map((cap, i) => (
-            <motion.div key={i} whileHover={{ y: -5 }} className="p-6 bg-gray-900/40 border border-gray-800 rounded-2xl hover:border-amber-500/50 transition-all cursor-pointer">
-              <h3 className="text-lg font-bold">{cap}</h3>
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -8, scale: 1.02 }} 
+              className="p-6 bg-gray-900/40 border border-gray-800 rounded-2xl hover:border-amber-500/50 transition-all cursor-pointer hover:shadow-[0_0_20px_rgba(245,158,11,0.15)]"
+            >
+              <h3 className="text-xl font-bold">{cap}</h3>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Selected Works */}
+      {/* 4. Selected Works */}
       <section className="py-20 px-6 max-w-7xl mx-auto relative z-10">
         <h2 className="text-4xl font-black mb-12 text-center">SELECTED WORKS</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((p, i) => (
             <Link key={i} href={`/service/${p.slug}`} className="block group">
-              <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} scale={1.02}>
-                <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-2 hover:border-amber-500/40 transition-all">
+              <Tilt tiltMaxAngleX={12} tiltMaxAngleY={12} scale={1.03}>
+                <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-2 transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-500/40 cursor-pointer">
                   <div className="overflow-hidden rounded-2xl">
-                    <img src={p.img} alt={p.title} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={p.img} alt={p.title} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-xl group-hover:text-amber-500">{p.title}</h3>
+                    <h3 className="font-bold text-xl group-hover:text-amber-500 transition-colors">{p.title}</h3>
                     <p className="text-gray-400 text-sm mt-1">{p.ar}</p>
                     <span className="text-amber-500 text-xs mt-3 block font-bold group-hover:underline">عرض التفاصيل ←</span>
                   </div>
@@ -90,16 +108,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Footer */}
+      {/* 5. Contact Footer */}
       <footer className="py-20 text-center border-t border-gray-800 z-10 relative">
-        <a href="https://wa.me/201220414662" target="_blank" rel="noopener noreferrer">
-          <motion.button whileHover={{ scale: 1.05 }} className="bg-amber-500 text-black px-12 py-4 rounded-full font-black text-xl mb-10 hover:bg-white transition-all">
-            CONTACT ME
-          </motion.button>
-        </a>
+        <motion.button 
+          whileHover={{ scale: 1.05 }} 
+          whileTap={{ scale: 0.95 }}
+          className="bg-amber-500 text-black px-12 py-4 rounded-full font-black text-xl mb-10 shadow-[0_4px_20px_rgba(245,158,11,0.3)] hover:bg-amber-400 transition-all"
+        >
+          CONTACT ME
+        </motion.button>
         <div className="flex justify-center gap-8 text-gray-400">
-          <a href="https://wa.me/201220414662" className="hover:text-amber-500 transition-colors">WhatsApp</a>
-          <a href="https://www.facebook.com/share/1J1qMR6gxU/" className="hover:text-amber-500 transition-colors">Facebook</a>
+          <a href="https://wa.me/201220414662" target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 transition-colors">WhatsApp</a>
+          <a href="https://www.facebook.com/share/1J1qMR6gxU/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 transition-colors">Facebook</a>
         </div>
       </footer>
     </main>

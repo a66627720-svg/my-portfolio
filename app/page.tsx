@@ -28,7 +28,6 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-4">
           <UserButton 
-            afterSignOutUrl="/" 
             appearance={{
               elements: {
                 avatarBox: "w-10 h-10 border-2 border-amber-500/80 hover:scale-105 transition-transform"
@@ -90,25 +89,22 @@ export default function Home() {
       <section className="py-20 px-6 max-w-7xl mx-auto relative z-10">
         <h2 className="text-4xl font-black mb-12 text-center">SELECTED WORKS</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((p, i) => {
-            // هنا تم التعديل ليقرأ الـ slug المكتوب فوق مباشرة لضمان الربط الموثوق 100%
-            return (
-              <Link key={i} href={`/service/${p.slug}`} className="block group">
-                <Tilt tiltMaxAngleX={12} tiltMaxAngleY={12} scale={1.03}>
-                  <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-2 transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-500/40 cursor-pointer">
-                    <div className="overflow-hidden rounded-2xl">
-                      <img src={p.img} alt={p.title} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-xl group-hover:text-amber-500 transition-colors">{p.title}</h3>
-                      <p className="text-gray-400 text-sm mt-1">{p.ar}</p>
-                      <span className="text-amber-500 text-xs mt-3 block font-bold group-hover:underline">عرض التفاصيل ←</span>
-                    </div>
+          {projects.map((p, i) => (
+            <Link key={i} href={`/service/${p.slug}`} className="block group">
+              <Tilt tiltMaxAngleX={12} tiltMaxAngleY={12} scale={1.03}>
+                <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-2 transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-500/40 cursor-pointer">
+                  <div className="overflow-hidden rounded-2xl">
+                    <img src={p.img} alt={p.title} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                   </div>
-                </Tilt>
-              </Link>
-            );
-          })}
+                  <div className="p-4">
+                    <h3 className="font-bold text-xl group-hover:text-amber-500 transition-colors">{p.title}</h3>
+                    <p className="text-gray-400 text-sm mt-1">{p.ar}</p>
+                    <span className="text-amber-500 text-xs mt-3 block font-bold group-hover:underline">عرض التفاصيل ←</span>
+                  </div>
+                </div>
+              </Tilt>
+            </Link>
+          ))}
         </div>
       </section>
 
