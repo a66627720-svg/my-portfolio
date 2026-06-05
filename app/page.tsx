@@ -27,7 +27,9 @@ export default function Home() {
           PORTFOLIO
         </div>
         <div className="flex items-center gap-4">
+          {/* @ts-ignore */}
           <UserButton 
+            signOutUrl="/"
             appearance={{
               elements: {
                 avatarBox: "w-10 h-10 border-2 border-amber-500/80 hover:scale-105 transition-transform"
